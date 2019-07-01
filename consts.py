@@ -1,0 +1,4 @@
+PAD = "<PAD>"
+UNK = "<UNK>"
+START_TAG = "<START>"
+STOP_TAG = "<STOP>"
