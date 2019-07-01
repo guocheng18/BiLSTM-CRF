@@ -32,7 +32,7 @@ if __name__ == "__main__":
     if args.model is None:
         raise ValueError("Please specify model file path")
 
-    data_dir = "data/CoNLL2003/processed"
+    data_dir = "data/Chinese/processed"
     word_to_ix = load_obj(os.path.join(data_dir, "word_to_ix.pkl"))
     tag_to_ix = load_obj(os.path.join(data_dir, "tag_to_ix.pkl"))
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     # Predict
     sentence = torch.LongTensor(
-        [word_to_ix.get(w, word_to_ix[UNK]) for w in args.sentence.split()]
+        [word_to_ix.get(w, word_to_ix[UNK]) for w in args.sentence]
     )
     best_tags = tagging(model, sentence, ix_to_tag)
     print(" ".join(best_tags))

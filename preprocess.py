@@ -88,11 +88,19 @@ def transform(data):
     """Transform words and tags to ids
     """
     new_data = []
+    unknown_word_count = 0
+    total_word_count = 0
     for words, tags in data:
         word_ids = [word_to_ix.get(w, word_to_ix[UNK]) for w in words]
         tag_ids = [tag_to_ix.get(t) for t in tags]
         new_data.append((word_ids, tag_ids))
-    return new_data
+        # count
+        total_word_count += len(words)
+        for w in words:
+            if w not in word_to_ix:
+                unknown_word_count += 1
+    unknown_proportion = unknown_word_count / total_word_count
+    return new_data, unknown_proportion
 
 
 if __name__ == "__main__":
@@ -117,10 +125,11 @@ if __name__ == "__main__":
     print(tag_to_ix)
 
     # Transform
-    train_data = transform(train_data)
-    test_data = transform(test_data)
-    dev_data = transform(dev_data)
+    train_data, _ = transform(train_data)
+    test_data, p1 = transform(test_data)
+    dev_data, p2 = transform(dev_data)
     print(train_data[0], test_data[0], dev_data[0])
+    print(f"Unknown proportion, dev: {p2}, test: {p1}")
 
     # Save
     data_dir = f"data/{args.dataset}/processed"

@@ -5,7 +5,7 @@ import os
 
 import torch
 import torch.optim as optim
-from seqeval.metrics import f1_score
+from seqeval.metrics import f1_score, precision_score, recall_score
 from torch.utils.data import DataLoader
 
 from dataset import BatchPadding, NERDataset
@@ -32,6 +32,15 @@ torch.manual_seed(123)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+def score(y_true, y_pred):
+    """Wrapper of seqeval metrics
+    """
+    precision = precision_score(y_true, y_pred)
+    recall = recall_score(y_true, y_pred)
+    f1 = f1_score(y_true, y_pred)
+    return precision, recall, f1
+
+
 def evaluate(model, loader, ix_to_tag):
     """Evaluate on dev or test data
     """
@@ -49,8 +58,8 @@ def evaluate(model, loader, ix_to_tag):
             tags_l = tags.t().tolist()
             for t, ln in zip(tags_l, lens):
                 y_true.append([ix_to_tag[ix] for ix in t[:ln]])
-        f1 = f1_score(y_true, y_pred)
-    return f1
+        score = score(y_true, y_pred)
+    return score
 
 
 if __name__ == "__main__":
@@ -121,9 +130,10 @@ if __name__ == "__main__":
                     )
                 )
         print("Evaluating...")
-        dev_f1 = evaluate(model, dev_loader, ix_to_tag)
-        test_f1 = evaluate(model, test_loader, ix_to_tag)
-        print(f"\ndev f1: {dev_f1}, test f1: {test_f1}\n")
+        dev_precision, dev_recall, dev_f1 = evaluate(model, dev_loader, ix_to_tag)
+        test_precision, test_recall, test_f1 = evaluate(model, test_loader, ix_to_tag)
+        print(f"\ndev\tprecision: {dev_precision}, recall: {dev_recall}, f1: {dev_f1}")
+        print(f"test\tprecision: {test_precision}, recall: {test_recall}, f1: {test_f1}\n")
 
         torch.save(model.state_dict(), f"checkpoints/{args.name}/model-epoch{epoch}.pt")
 
@@ -133,5 +143,6 @@ if __name__ == "__main__":
         else:
             bad_count += 1
             if bad_count >= args.patience:
-                print("Early stopped.")
+                print("Early stopped!")
                 break
+    print("Best dev F1: ", best_dev_f1)
