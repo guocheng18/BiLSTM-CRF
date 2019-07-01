@@ -6,9 +6,6 @@ import pickle
 
 from consts import PAD, UNK
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--dataset", type=str, default="Chinese")
-args = parser.parse_args()
 
 word_to_ix = {PAD: 0, UNK: 1}
 
@@ -99,6 +96,10 @@ def transform(data):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", type=str, default="Chinese")
+    args = parser.parse_args()
+
     # Example: [(('I', 'am', 'in', 'Beijing'), ('B-PER', 'O', 'O', 'B-LOC')), ...]
     train_data = read_file(f"data/{args.dataset}/raw/train.txt")
     test_data = read_file(f"data/{args.dataset}/raw/test.txt")
