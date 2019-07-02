@@ -105,7 +105,7 @@ def transform(data):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", type=str, default="Chinese")
+    parser.add_argument("--dataset", type=str, default="msra")
     args = parser.parse_args()
 
     # Example: [(('I', 'am', 'in', 'Beijing'), ('B-PER', 'O', 'O', 'B-LOC')), ...]

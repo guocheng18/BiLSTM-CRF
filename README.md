@@ -17,8 +17,8 @@ First prepare the following directories for each dataset,
 then place `train.txt, dev.txt and test.txt` into the raw folder, note data is supposed to be organized as that
 one word/tag one line, sentences are sepreated by blankline.
 
-For Chinese NER dataset, you can access one from <https://github.com/GeneZC/Chinese-NER/tree/master/data>  
-For English NER dataset, you can access one from <https://github.com/davidsbatista/NER-datasets/tree/master/CONLL2003>
+For Chinese NER dataset, you can access MSRA from <https://github.com/GeneZC/Chinese-NER/tree/master/data>  
+For English NER dataset, you can access CoNLL03 from <https://github.com/davidsbatista/NER-datasets/tree/master/CONLL2003>
 
 ## Preprocess
 

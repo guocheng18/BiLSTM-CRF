@@ -32,7 +32,7 @@ if __name__ == "__main__":
     if args.model is None:
         raise ValueError("Please specify model file path")
 
-    data_dir = "data/Chinese/processed"
+    data_dir = "data/msra/processed"
     word_to_ix = load_obj(os.path.join(data_dir, "word_to_ix.pkl"))
     tag_to_ix = load_obj(os.path.join(data_dir, "tag_to_ix.pkl"))
 

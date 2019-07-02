@@ -14,7 +14,7 @@ from preprocess import load_obj
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default=None)
-parser.add_argument("--dataset", type=str, default="Chinese")
+parser.add_argument("--dataset", type=str, default="msra")
 parser.add_argument("--embed-dim", type=int, default=100)
 parser.add_argument("--hidden-dim", type=int, default=200)
 parser.add_argument("--batch-size", type=int, default=64)

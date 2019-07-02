@@ -45,7 +45,7 @@ class BatchPadding(object):
 
 if __name__ == "__main__":
 
-    dataset = NERDataset("data/Chinese/processed/train.pkl")
+    dataset = NERDataset("data/msra/processed/train.pkl")
     print(len(dataset))
 
     from torch.utils.data import DataLoader
