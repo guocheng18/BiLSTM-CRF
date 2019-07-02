@@ -58,8 +58,7 @@ def evaluate(model, loader, ix_to_tag):
             tags_l = tags.t().tolist()
             for t, ln in zip(tags_l, lens):
                 y_true.append([ix_to_tag[ix] for ix in t[:ln]])
-        score = score(y_true, y_pred)
-    return score
+    return score(y_true, y_pred)
 
 
 if __name__ == "__main__":
