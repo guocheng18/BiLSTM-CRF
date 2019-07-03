@@ -93,18 +93,3 @@ class BiLSTM_CRF(nn.Module):
         emissions = self._get_emissions(seqs, masks)
         best_tags = self.crf.decode(emissions, mask=masks)
         return best_tags
-
-
-if __name__ == "__main__":
-    vocab_size = 3
-    num_tags = 2
-    embed_dim = 10
-    hidden_dim = 10
-    dropout = 0.1
-    model = BiLSTM_CRF(vocab_size, num_tags, embed_dim, hidden_dim, dropout)
-    # Inputs are sorted
-    seqs = torch.LongTensor([[1, 2, 1], [1, 0, 0]]).t()
-    tags = torch.LongTensor([[1, 1, 0], [0, 0, 0]]).t()
-    masks = seqs.ne(0)
-    print(model.loss(seqs, tags, masks))
-    print(model.decode(seqs, masks))

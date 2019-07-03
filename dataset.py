@@ -41,15 +41,3 @@ class BatchPadding(object):
         tags = pad_sequence(tags)
         masks = seqs.ne(0)
         return seqs, tags, masks # (seq_len, batch_size)
-
-
-if __name__ == "__main__":
-
-    dataset = NERDataset("data/msra/processed/train.pkl")
-    print(len(dataset))
-
-    from torch.utils.data import DataLoader
-    loader = DataLoader(dataset, batch_size=10, collate_fn=BatchPadding())
-    for seqs, tags, masks in loader:
-        print(seqs)
-        break
