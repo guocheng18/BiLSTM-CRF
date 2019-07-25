@@ -1,4 +1,9 @@
-# ner_bilstm_crf
+# BiLSTM-CRF
+<p>
+    <img src="https://img.shields.io/badge/python-3.6-blue" />
+    <img src="https://img.shields.io/badge/license-MIT-green" />
+</p>
+A pytorch implementation of BiLSTM-CRF model for Chinese/English NER task.
 
 ## Requirements
 
@@ -48,7 +53,8 @@ Tagging using trained model.
 Example:
 
 ```bash
-python tagging.py --sentence="中国同加利福尼亚州的友好交往源远流长" --model="checkpoints/name-of-train/model-epochX.pt"
+python tagging.py --sentence="中国同加利福尼亚州的友好交往源远流长" \
+    --model="checkpoints/name-of-train/model-epochX.pt"
 ```
 
 Output:
